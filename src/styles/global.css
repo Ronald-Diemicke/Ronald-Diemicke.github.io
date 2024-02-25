@@ -1,10 +1,7 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@import url("modern-normalize");
 
 :root {
+    --nav-text: #ccc;
 	--accent: #2337ff;
 	--accent-dark: #000d8a;
 	--black: 15, 18, 25;
@@ -29,24 +26,26 @@
 	font-style: normal;
 	font-display: swap;
 }
+html {
+    background-color: #000;
+    font-size: 16px;
+}
 body {
 	font-family: 'Atkinson', sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
+	color: rgb(var(--gray-light));
 	line-height: 1.7;
 }
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+    position: relative;
+    top: -55.35px;
+}
+video {
+    width: 100%;
 }
 h1,
 h2,
@@ -55,7 +54,7 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
+	color: rgb(var(--grey-light));
 	line-height: 1.2;
 }
 h1 {
@@ -126,12 +125,43 @@ hr {
 	border: none;
 	border-top: 1px solid rgb(var(--gray-light));
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
+@media (min-width: 768px) {
+	section.block {
+        position: relative;
+
+        h1 {
+            background: rgba(0,0,0,.3);
+            border-radius: 20px 0 0 20px;
+            border: 1px solid transparent;
+            font-size: 3.2rem;
+            position: absolute;
+            top: 140px;
+            right: 0;
+            padding: 2% 14% 2% 2%;
+            backdrop-filter: blur(20px);
+            width: 70%;
+        }
+   }
+}
+
+@media (min-width: 1280px) {
+	html {
+		font-size: 24px;
 	}
-	main {
-		padding: 1em;
+	section.block h1 {
+	    width:60%;
+	}
+}
+
+@media (min-width: 2560px) {
+    html {
+		font-size: 48px;
+	}
+}
+
+@media (min-width: 3840px) {
+    html {
+		font-size: 72px;
 	}
 }
 
