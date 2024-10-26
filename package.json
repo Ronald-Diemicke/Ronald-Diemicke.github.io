@@ -6,7 +6,8 @@
     "cms": "npx tinacms dev -c \"astro dev --port 8080\"\n",
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "tinacms build -c \"astro build\"\n",
+    "runTina": "npx tinacms build",
+    "runAstro": "npx astro build",
     "buildlocal": "tinacms build --local --skip-cloud-checks -c \"astro build\"\n",
     "preview": "astro preview"
   },

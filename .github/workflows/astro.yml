@@ -64,18 +64,18 @@ jobs:
       - name: Install dependencies
         run: "npm install"
         working-directory: ${{ env.BUILD_PATH }}
-      - name: Build with Astro
+      - name: Setup TinaCMS
         env:
-          CI: true
-          NEXT_PUBLIC_TINA_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_TINA_CLIENT_ID }}
-          TINA_SECRETS: ${{ secrets.TINA_SECRETS }}
-        run: npm run build
+          TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+          TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
+        run: npm run runTina
         working-directory: ${{ env.BUILD_PATH }}
+      - name: Build with Astro
+        run: npm run runAstro
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.BUILD_PATH }}/dist
-
   deploy:
     environment:
       name: github-pages
