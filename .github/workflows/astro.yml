@@ -69,6 +69,8 @@ jobs:
           touch .env
           echo TINA_PUBLIC_CLIENT_ID=${{ secrets.TINA_PUBLIC_CLIENT_ID }} >> .env
           echo TINA_TOKEN=${{ secrets.TINA_TOKEN }} >> .env
+          echo "cat .env"
+          cat .env
       - name: Setup TinaCMS
         run: npm run runTina
         working-directory: ${{ env.BUILD_PATH }}
