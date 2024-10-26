@@ -42,9 +42,9 @@ export default defineConfig({
   },
 
   // Get this from tina.io
-  clientId: secrets.NEXT_PUBLIC_TINA_CLIENT_ID,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
   // Get this from tina.io
-  token: secrets.TINA_TOKEN,
+  token: process.env.TINA_TOKEN,
 
   build: {
     outputFolder: "admin",
