@@ -27,6 +27,8 @@ concurrency:
 env:
   BUILD_PATH: "." # default value when not using subfolders
   # BUILD_PATH: subfolder
+  TINA_PUBLIC_CLIENT_ID: ${{ secrets.TINA_PUBLIC_CLIENT_ID }}
+  TINA_TOKEN: ${{ secrets.TINA_TOKEN }}
 
 jobs:
   build:
