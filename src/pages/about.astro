@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = Astro.site ?? 'https://example.com';
+const canonicalUrl = new URL('/about', baseUrl).href;
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Loki',
+  url: baseUrl,
+  description: 'Author of the Loki blog. Building with web components, Astro, and design systems.',
+};
+
+const aboutPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'About me · Loki',
+  description: 'About the author of the Loki blog and this site.',
+  url: canonicalUrl,
+  mainEntity: { '@type': 'Person', name: 'Loki', url: baseUrl },
+};
+
+const structuredData = [personSchema, aboutPageSchema];
+---
+
+<BaseLayout
+  title="About me · Loki"
+  description="About the author of the Loki blog. Building with web components, Astro, and design systems."
+  structuredData={structuredData}
+>
+  <div class="blog-wrap">
+    <header class="blog-header">
+      <h1 class="blog-title"><a href="/">Loki</a></h1>
+      <nav class="blog-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/about">About me</a>
+        <a href="/resources">Resources</a>
+        <a href="/">Archive</a>
+      </nav>
+    </header>
+
+    <main class="blog-main">
+      <article class="blog-article">
+        <h1 class="blog-article-title">About me</h1>
+
+        <div class="blog-article-body">
+          <p>
+            I build things on the web—from small design systems to static sites and component libraries.
+            This blog is where I write about web components, Astro, theming, and the tools that make it
+            easier to ship clear, maintainable UI.
+          </p>
+          <p>
+            Loki is the name of the component library and design system I use here: custom elements
+            with Light DOM, CSS custom properties for theming, and Storybook for documentation.
+            You can toggle light and dark theme on any page and explore the components in action.
+          </p>
+          <p>
+            When I’m not coding, I like to read, tinker with side projects, and keep the docs in sync
+            with the code.
+          </p>
+        </div>
+
+        <footer class="blog-article-footer">
+          <a href="/" class="blog-back-link">&larr; Back to home</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="blog-footer">
+      <p style="margin: 0;">© {new Date().getFullYear()} Loki. Built with Astro and web components.</p>
+    </footer>
+  </div>
+</BaseLayout>

@@ -1,36 +1,21 @@
 {
-  "name": "tinacms-rpd-test",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "ronald-diemicke",
+  "type": "module",
+  "version": "0.0.1",
   "scripts": {
-    "cms": "npx tinacms dev -c \"astro dev --port 8080\"\n",
     "dev": "astro dev",
-    "start": "astro dev",
-    "runTina": "npx tinacms build",
-    "runAstro": "npx astro build",
-    "buildlocal": "tinacms build --local --skip-cloud-checks -c \"astro build\"\n",
-    "preview": "astro preview"
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "@astrojs/mdx": "^3.1.8",
-    "@astrojs/react": "^3.6.2",
-    "@astrojs/sitemap": "^3.2.1",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "tinacms": "^2.2.8"
+    "astro": "^5.17.1"
   },
   "devDependencies": {
-    "@tinacms/cli": "^1.6.8",
-    "@types/node": "^22.7.4",
-    "astro": "^5.14.4",
-    "astro-tina": "^0.1.2",
-    "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.1"
+    "@storybook/addon-mcp": "^0.2.2",
+    "@storybook/web-components-vite": "^10.2.8",
+    "storybook": "^10.2.8"
   }
 }

@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = Astro.site ?? 'https://example.com';
+const canonicalUrl = new URL('/resources', baseUrl).href;
+
+const resources = [
+  { name: 'Astro', url: 'https://astro.build', description: 'Static site framework. Docs, guides, and the Astro Docs MCP server.' },
+  { name: 'Web Components (MDN)', url: 'https://developer.mozilla.org/en-US/docs/Web/Web_Components', description: 'Custom elements, Shadow DOM, and HTML templates.' },
+  { name: 'Storybook', url: 'https://storybook.js.org', description: 'Component development and documentation. Web Components + Vite framework.' },
+  { name: 'Model Context Protocol', url: 'https://modelcontextprotocol.io', description: 'Standard for connecting AI tools to data sources and APIs.' },
+  { name: 'Schema.org', url: 'https://schema.org', description: 'Structured data vocabulary for search and rich results.' },
+];
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'Resources · Loki',
+  description: 'Curated links for web components, Astro, Storybook, and related tooling.',
+  url: canonicalUrl,
+};
+
+const structuredData = [webPageSchema];
+---
+
+<BaseLayout
+  title="Resources · Loki"
+  description="Curated links for web components, Astro, Storybook, MCP, and related tooling."
+  structuredData={structuredData}
+>
+  <div class="blog-wrap">
+    <header class="blog-header">
+      <h1 class="blog-title"><a href="/">Loki</a></h1>
+      <nav class="blog-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/about">About me</a>
+        <a href="/resources">Resources</a>
+        <a href="/">Archive</a>
+      </nav>
+    </header>
+
+    <main class="blog-main">
+      <article class="blog-article">
+        <h1 class="blog-article-title">Resources</h1>
+
+        <div class="blog-article-body">
+          <p>
+            Links and references that are useful when working with web components, Astro,
+            Storybook, and the rest of the stack behind this site.
+          </p>
+
+          <ul class="resources-list">
+            {resources.map((r) => (
+              <li>
+                <a href={r.url} target="_blank" rel="noopener noreferrer">{r.name}</a>
+                <span class="resources-desc"> — {r.description}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <footer class="blog-article-footer">
+          <a href="/" class="blog-back-link">&larr; Back to home</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="blog-footer">
+      <p style="margin: 0;">© {new Date().getFullYear()} Loki. Built with Astro and web components.</p>
+    </footer>
+  </div>
+</BaseLayout>

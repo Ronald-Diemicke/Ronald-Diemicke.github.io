@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPostsSortedByDate } from '../data/posts';
+
+const posts = getPostsSortedByDate();
+const baseUrl = Astro.site ?? 'https://example.com';
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Loki',
+  url: baseUrl,
+  description: 'A blog about web components, Astro, and the Loki design system.',
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Loki',
+  url: baseUrl,
+  description: 'A blog about web components, Astro, and building UI with the Loki design system. Toggle light or dark theme and explore component stories.',
+  publisher: { '@id': `${baseUrl}#organization` },
+};
+
+const structuredData = [
+  { ...organizationSchema, '@id': `${baseUrl}#organization` },
+  websiteSchema,
+];
+---
+
+<BaseLayout
+  title="Blog · Loki"
+  description="A blog about web components, Astro, and building UI with the Loki design system. Toggle light or dark theme and explore component stories."
+  structuredData={structuredData}
+>
+  <div class="blog-wrap">
+    <header class="blog-header">
+      <h1 class="blog-title"><a href="/">Loki</a></h1>
+      <nav class="blog-nav" aria-label="Main">
+        <a href="/">Home</a>
+        <a href="/about">About me</a>
+        <a href="/resources">Resources</a>
+        <a href="/">Archive</a>
+      </nav>
+    </header>
+
+    <main class="blog-main">
+      <p class="blog-intro">
+        A blog about web components, Astro, and building UI with the Loki design system. Toggle light or dark theme with the button in the corner.
+      </p>
+
+      <section class="blog-posts" aria-label="Recent posts">
+        {posts.map((post) => (
+          <a href={`/blog/${post.slug}`} class="blog-post-card">
+            <time class="blog-post-date" datetime={post.date}>
+              {new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <h2 class="blog-post-title">{post.title}</h2>
+            <p class="blog-post-excerpt">{post.excerpt}</p>
+          </a>
+        ))}
+      </section>
+
+      <h2 class="blog-section-heading">Stay updated</h2>
+      <div class="blog-cta">
+        <loki-card title="Subscribe">
+          <p style="margin-bottom: 1rem;">Get new posts in your inbox. No spam.</p>
+          <loki-input label="Email" type="email" name="email" placeholder="you@example.com" />
+          <div style="margin-top: 1rem;">
+            <loki-button variant="primary" label="Subscribe"></loki-button>
+          </div>
+        </loki-card>
+      </div>
+    </main>
+
+    <footer class="blog-footer">
+      <p style="margin: 0;">© {new Date().getFullYear()} Loki. Built with Astro and web components.</p>
+    </footer>
+  </div>
+</BaseLayout>
